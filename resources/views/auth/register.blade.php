@@ -20,6 +20,20 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="phone" value="{{ __('Phone') }}" />
+                <x-jet-input id="phone" class="block mt-1 w-full" type="tel" name="phone" :value="old('phone')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="language" value="{{ __('Language') }}" />
+                <select id="language" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" name="language" required >
+                    @foreach(\App\Enums\LanguageEnum::cases() as $case)
+                        <option value="{{ $case->value }}">{{ $case->value }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
