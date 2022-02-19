@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PatientValidationRequest;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -34,12 +35,16 @@ class PatientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  PatientValidationRequest  $request
+     * @return \Illuminate\Contracts\View\View
      */
-    public function store(Request $request)
+    public function store(PatientValidationRequest $request)
     {
-        //
+        Patient::query()->create($request->validated());
+
+        return view('dashboard.patient.index', [
+            'patients' => Patient::all(),
+        ]);
     }
 
     /**

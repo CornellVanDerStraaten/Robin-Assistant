@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="my-2 mx-4">
 
-                    <form method="POST" action="{{ route('patients.store') }}" class="space-y-8 divide-y divide-gray-200">
+                    <form method="POST" action="{{ route('patients.store') }}" class="space-y-2">
                         @csrf
                         <div class="space-y-8 divide-y divide-gray-200">
                             <div class="pt-2">
@@ -77,10 +77,13 @@
                                         <label for="color" class="block text-sm font-medium text-gray-700"> Color </label>
                                         <div class="mt-1">
                                             <input type="color" name="color" id="color"
-                                                   class="shadow-sm w-1/4 h-10 rounded focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                   class="shadow-sm w-full h-10 rounded focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                     </div>
 
+                                </div>
+                                <div class="mt-4">
+                                    <x-jet-validation-errors/>
                                 </div>
                             </div>
                             <div class="pt-5 pb-3">
