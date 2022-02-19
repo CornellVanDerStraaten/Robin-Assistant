@@ -10,8 +10,9 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="my-2 mx-4">
 
-                    <form method="POST" action="{{ route('patients.store') }}" class="space-y-2">
+                    <form method="POST" action="{{ $patient ? route('patients.update', $patient->id) : route('patients.store') }}" class="space-y-2">
                         @csrf
+                        @if($patient) @method('PATCH') @endif
                         <div class="space-y-8 divide-y divide-gray-200">
                             <div class="pt-2">
                                 <div>
@@ -22,7 +23,7 @@
                                     <div class="sm:col-span-3">
                                         <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
                                         <div class="mt-1">
-                                            <input type="text" name="name" id="name"
+                                            <input type="text" name="name" id="name" value="{{ old('name') ?: ($patient ? $patient->name : '') }}"
                                                    autocomplete="given-name"
                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                         </div>
@@ -31,7 +32,7 @@
                                     <div class="sm:col-span-3">
                                         <label for="date_of_birth" class="block text-sm font-medium text-gray-700"> Date of birth </label>
                                         <div class="mt-1">
-                                            <input type="date" name="date_of_birth" id="date_of_birth"
+                                            <input type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth') ?: ($patient ? $patient->date_of_birth->format('Y-m-d') : '') }}"
                                                    autocomplete="date_of_birth"
                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                         </div>
@@ -43,7 +44,7 @@
                                             <select id="language" name="language" autocomplete="language-name"
                                                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md uppercase">
                                                 @foreach(\App\Enums\LanguageEnum::cases() as $case)
-                                                    <option value="{{ $case->value }}" @if($case->value == old('language')) selected @endif>{{ $case->value }}</option>
+                                                    <option value="{{ $case->value }}" @if((old('language') ?: ($patient ? $patient->language->value : '')) == $case->value) selected @endif>{{ $case->value }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -55,7 +56,7 @@
                                             <select id="gender" name="gender" autocomplete="gender"
                                                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md capitalize">
                                                 @foreach(\App\Enums\GenderEnum::cases() as $case)
-                                                    <option value="{{ $case->value }}" @if($case->value == old('gender')) selected @endif>{{ $case->value }}</option>
+                                                    <option value="{{ $case->value }}" @if((old('gender') ?: ($patient ? $patient->gender->value : '')) == $case->value) selected @endif>{{ $case->value }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -67,7 +68,7 @@
                                             <select id="relation" name="relation"
                                                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md capitalize">
                                                 @foreach(\App\Enums\RelationEnum::cases() as $case)
-                                                    <option value="{{ $case->value }}" @if($case->value == old('relation')) selected @endif>{{ $case->value }}</option>
+                                                    <option value="{{ $case->value }}" @if((old('relation') ?: ($patient ? $patient->relation->value : '')) == $case->value) selected @endif>{{ $case->value }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -76,7 +77,7 @@
                                     <div class="sm:col-span-3">
                                         <label for="color" class="block text-sm font-medium text-gray-700"> Color </label>
                                         <div class="mt-1">
-                                            <input type="color" name="color" id="color"
+                                            <input type="color" name="color" id="color" value="{{ old('color') ?: ($patient ? $patient->color : '') }}"
                                                    class="shadow-sm w-full h-10 rounded focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                     </div>
@@ -88,7 +89,7 @@
                             </div>
                             <div class="pt-5 pb-3">
                                 <div class="flex justify-end">
-                                    <a href="{{ route('patients.index') }}"
+                                    <a href="{{ url()->previous() }}"
                                             class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Cancel
                                     </a>

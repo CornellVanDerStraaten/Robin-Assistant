@@ -36,15 +36,13 @@ class PatientController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  PatientValidationRequest  $request
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(PatientValidationRequest $request)
     {
         Patient::query()->create($request->validated());
 
-        return view('dashboard.patient.index', [
-            'patients' => Patient::all(),
-        ]);
+        return redirect()->route('patients.index');
     }
 
     /**
@@ -55,18 +53,20 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        //
+        dd('test');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(Patient $patient)
     {
-        //
+        return view('dashboard.patient.form', [
+            'patient' => $patient
+        ]);
     }
 
     /**
@@ -74,21 +74,25 @@ class PatientController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Patient $patient)
+    public function update(PatientValidationRequest $request, Patient $patient)
     {
-        //
+        $patient->query()->update($request->validated());
+
+        return redirect()->route('patients.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Patient $patient)
     {
-        //
+        $patient->delete();
+
+        return redirect()->route('patients.index');
     }
 }

@@ -22,6 +22,7 @@ class Patient extends Model
     ];
 
     protected $casts = [
+        'date_of_birth' => 'date',
         'gender' => GenderEnum::class,
         'language' => LanguageEnum::class,
         'relation' => RelationEnum::class

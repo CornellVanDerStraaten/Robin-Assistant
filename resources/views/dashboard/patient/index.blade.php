@@ -31,10 +31,14 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">{{ $patient->relation->value }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 uppercase">{{ $patient->language->value }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-blue-600 hover:text-blue-900">Edit</a>
+                                    <a href="{{ route('patients.edit', $patient->id) }}" class="text-blue-600 hover:text-blue-900">Edit</a>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
+                                    <form action="{{route('patients.destroy', $patient->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
