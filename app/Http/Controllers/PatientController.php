@@ -40,7 +40,9 @@ class PatientController extends Controller
      */
     public function store(PatientValidationRequest $request)
     {
-        Patient::query()->create($request->validated());
+        $patient = Patient::query()->create($request->validated());
+
+        toast()->success('Patient: ' . $patient->name . ' has been created.',)->push();
 
         return redirect()->route('patients.index');
     }
@@ -49,11 +51,13 @@ class PatientController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(Patient $patient)
     {
-        dd('test');
+        return view('dashboard.patient.show', [
+            'patient' => $patient
+        ]);
     }
 
     /**
@@ -78,7 +82,11 @@ class PatientController extends Controller
      */
     public function update(PatientValidationRequest $request, Patient $patient)
     {
-        $patient->query()->update($request->validated());
+        Patient::query()->find($patient->id)->update($request->validated());
+
+        $patient = Patient::query()->find($patient->id);
+        
+        toast()->success('Patient: ' . $patient->name . ' has been updated.',)->push();
 
         return redirect()->route('patients.index');
     }
@@ -92,6 +100,8 @@ class PatientController extends Controller
     public function destroy(Patient $patient)
     {
         $patient->delete();
+
+        toast()->success('Patient: ' . $patient->name . ' has been deleted.',)->push();
 
         return redirect()->route('patients.index');
     }

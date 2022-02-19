@@ -15,25 +15,29 @@
                     <table class="w-full divide-y divide-gray-200 border">
                         <thead class="bg-gray-50">
                         <tr>
+                            <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Show</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date of birth</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Relation</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Language</th>
-                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Edit</th>
-                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Delete</th>
+                            <th scope="col" class="px-3 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Edit</th>
+                            <th scope="col" class="px-3 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Delete</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($patients as $patient)
-                            <tr class="@if($loop->iteration % 2 == 1) bg-white @else bg-gray-50 @endif  capitalize">
-                                <td class="px-6 py-4 whitesp ace-nowrap text-sm font-medium text-gray-900">{{ $patient->name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $patient->date_of_birth }}</td>
+                            <tr class="@if($loop->iteration % 2 == 1) bg-white @else bg-gray-50 @endif">
+                                <td class="px-3 py-4 whitespace-nowrap text-left text-sm font-medium">
+                                    <a href="{{ route('patients.show', $patient->id) }}" class="text-blue-600 hover:text-blue-900">Show</a>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $patient->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $patient->date_of_birth->format('d-m-Y') }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">{{ $patient->relation->value }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 uppercase">{{ $patient->language->value }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <td class="px-3 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{{ route('patients.edit', $patient->id) }}" class="text-blue-600 hover:text-blue-900">Edit</a>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <td class="px-3 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <form action="{{route('patients.destroy', $patient->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
