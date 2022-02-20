@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PatientValidationRequest;
 use App\Models\Patient;
+use App\Models\PatientUser;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -42,6 +43,8 @@ class PatientController extends Controller
     {
         $patient = Patient::query()->create($request->validated());
 
+        $patient->attachSupervisor(auth()->id());
+
         toast()->success('Patient: ' . $patient->name . ' has been created.',)->push();
 
         return redirect()->route('patients.index');
@@ -56,7 +59,8 @@ class PatientController extends Controller
     public function show(Patient $patient)
     {
         return view('dashboard.patient.show', [
-            'patient' => $patient
+            'patient' => $patient,
+            'supervisors' => $patient->supervisors,
         ]);
     }
 
@@ -85,7 +89,7 @@ class PatientController extends Controller
         Patient::query()->find($patient->id)->update($request->validated());
 
         $patient = Patient::query()->find($patient->id);
-        
+
         toast()->success('Patient: ' . $patient->name . ' has been updated.',)->push();
 
         return redirect()->route('patients.index');

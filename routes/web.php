@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PatientUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,5 +24,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::group(['prefix' => 'dashboard'], function () {
         Route::resource('patients', PatientController::class);
+        Route::group(['prefix' => 'patients/{patient}', 'name' => 'patients.'], function () {
+            Route::resource('patient-users', PatientUserController::class);
+        });
     });
 });
