@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientUserController;
+use App\Http\Controllers\Supervisors\DashboardController as SupervisorDashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,12 +21,19 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'overview'])->name('dashboard');
+    Route::group(['prefix' => 'supervisor', 'name' => 'supervisor.'], function () {
+        Route::get('dashboard', [SupervisorDashboardController::class, 'overview'])->name('dashboard');
+    });
 
-    Route::group(['prefix' => 'dashboard'], function () {
-        Route::resource('patients', PatientController::class);
-        Route::group(['prefix' => 'patients/{patient}', 'name' => 'patients.'], function () {
-            Route::resource('patient-users', PatientUserController::class);
+    Route::prefix('admin')->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'overview'])->name('admin.dashboard');
+
+        Route::group(['prefix' => 'dashboard'], function () {
+            Route::resource('patients', PatientController::class);
+            Route::group(['prefix' => 'patients/{patient}', 'name' => 'patients.'], function () {
+                Route::resource('patient-users', PatientUserController::class);
+            });
         });
     });
+
 });
