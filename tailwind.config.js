@@ -16,6 +16,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'sidebar-blue': '#5D76BB',
+            },
         },
     },
 

@@ -1,3 +1,3 @@
 <x-supervisors-layout>
-    test
+    <livewire:calendar-view />
 </x-supervisors-layout>
