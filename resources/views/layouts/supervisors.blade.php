@@ -24,7 +24,7 @@
     <x-jet-banner />
 
     <main class="h-full">
-        @include('partials.header')
+        @include('partials.header', ['dateArray' => $dateArray])
         <div class="flex flex-row h-5/6">
             @include('partials.sidebar')
             <div>
