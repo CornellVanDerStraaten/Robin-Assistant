@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientUserController;
 use App\Http\Controllers\Supervisors\DashboardController as SupervisorDashboardController;
+use App\Http\Controllers\ActivityController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,8 +22,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::group(['prefix' => 'supervisor', 'name' => 'supervisor.'], function () {
+    Route::prefix('supervisor')->group( function () {
         Route::get('dashboard', [SupervisorDashboardController::class, 'overview'])->name('dashboard');
+        Route::name('activity.')->group( function () {
+            Route::get('activities', [ActivityController::class, 'overview'])->name('overview');
+        });
+//        Route::resource('activity', ActivityController::class);
     });
 
     Route::prefix('admin')->group(function () {

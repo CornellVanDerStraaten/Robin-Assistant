@@ -18,6 +18,9 @@ module.exports = {
             },
             colors: {
                 'sidebar-blue': '#5D76BB',
+                'sidebar-blue-dark': '#425592',
+                'button-green': '#6fc099',
+                'button-green-dark': '#549b79',
             },
         },
     },
