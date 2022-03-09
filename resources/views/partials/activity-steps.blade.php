@@ -1,4 +1,4 @@
-<nav aria-label="Progress" class="px-10 py-5 border-b-2">
+<nav aria-label="Progress" class="px-10 py-5 border-b-2 h-1/6">
     <ol role="list" class="space-y-4 md:flex md:space-y-0 md:space-x-8">
         <li class="md:flex-1">
             <!-- Completed Step -->
