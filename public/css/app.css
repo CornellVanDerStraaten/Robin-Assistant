@@ -1893,6 +1893,14 @@ select {
   --tw-text-opacity: 1;
   color: rgb(93 118 187 / var(--tw-text-opacity));
 }
+.text-button-green {
+  --tw-text-opacity: 1;
+  color: rgb(111 192 153 / var(--tw-text-opacity));
+}
+.text-button-green-dark {
+  --tw-text-opacity: 1;
+  color: rgb(84 155 121 / var(--tw-text-opacity));
+}
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;

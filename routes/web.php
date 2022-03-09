@@ -24,10 +24,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::prefix('supervisor')->group( function () {
         Route::get('dashboard', [SupervisorDashboardController::class, 'overview'])->name('dashboard');
-        Route::name('activity.')->group( function () {
-            Route::get('activities', [ActivityController::class, 'overview'])->name('overview');
-        });
-//        Route::resource('activity', ActivityController::class);
+        Route::resource('activity', ActivityController::class);
     });
 
     Route::prefix('admin')->group(function () {
