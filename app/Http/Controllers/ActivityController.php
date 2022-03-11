@@ -18,7 +18,8 @@ class ActivityController extends Controller
     public function steps(Activity $activity)
     {
         return view('dashboard.activity.steps', [
-            'step' => 2
+            'step' => 2,
+            'activity' => $activity
         ]);
     }
 

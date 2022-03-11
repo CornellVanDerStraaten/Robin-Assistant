@@ -1,8 +1,9 @@
 <x-supervisors-layout>
     @include('partials.activity-steps')
     <div class="h-5/6">
-        <div class="h-5/6">
-test
+        <div class="h-5/6 flex flex-row gap-5 p-5 relative">
+            <livewire:sortable-steps-component />
+            <livewire:crud-step-component :activity="$activity"/>
         </div>
         <div class="flex flex-row gap-6 justify-center align-middle h-1/6 border-t border-gray-400">
             <a href="{{ route('activity.index') }}" class="text-white self-center bg-gray-500 hover:bg-gray-600 transition flex flex-row gap-8 rounded pl-3 py-2 pr-10">
