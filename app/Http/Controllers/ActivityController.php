@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -14,9 +15,9 @@ class ActivityController extends Controller
     }
 
 
-    public function create()
+    public function steps(Activity $activity)
     {
-        return view('dashboard.activity.create', [
+        return view('dashboard.activity.steps', [
             'step' => 2
         ]);
     }
