@@ -24,6 +24,7 @@ class CrudStepComponent extends Component
         (!$this->step) ? $this->newStep() : $this->fillStepData();
 
         $this->emit('selectedStepIdOnMount', $this->step->id);
+
     }
 
     public function render()

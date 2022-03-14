@@ -14,7 +14,7 @@ class SortableStepsComponent extends Component
     public $selectedStepId;
     public $first = true;
 
-    protected $listeners = ['refreshStep', 'startElement', 'selectedStepIdOnMount' => 'setSelected'];
+    protected $listeners = ['refreshStep', 'startElement', 'selectedStepIdOnMount' => 'setSelected', 'validateAllSteps'];
 
     public function render()
     {
@@ -56,5 +56,17 @@ class SortableStepsComponent extends Component
         foreach ($list as $item) {
             Step::find($item['value'])->update(['position' => $item['order']]);
         }
+    }
+
+    public function validateAllSteps()
+    {
+        foreach ($this->steps as $step) {
+            if (!$step->title || !$step->seconds || !$step->image_url) {
+                $this->emit('notAllStepsFilled');
+                break;
+            }
+        }
+
+        $this->emit('checkIfRedirectAllowed');
     }
 }
