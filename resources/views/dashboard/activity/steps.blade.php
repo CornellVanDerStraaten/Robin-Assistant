@@ -1,8 +1,8 @@
 <x-supervisors-layout>
     @include('partials.activity-steps')
     <div class="h-5/6">
-        <div class="h-5/6 flex flex-row gap-5 p-5 relative">
-            <livewire:sortable-steps-component />
+        <div class="h-5/6 flex flex-row p-5 relative">
+            <livewire:sortable-steps-component :activity="$activity" />
             <livewire:crud-step-component :activity="$activity"/>
         </div>
         <div class="flex flex-row gap-6 justify-center align-middle h-1/6 border-t border-gray-400">
