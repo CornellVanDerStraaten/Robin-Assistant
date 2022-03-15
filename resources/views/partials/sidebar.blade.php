@@ -15,7 +15,5 @@
     </div>
     <div class="flex flex-col align-middle w-full text-white mt-1 pl-7">
         <a href="{{ route('activity.index') }}" class="w-full text-md flex pb-1.5 pt-1.5 pl-10">Activiteiten</a>
-        <a class="w-full text-md flex pb-1.5 pt-1.5 pl-10">Linkie</a>
-        <a class="w-full text-md flex pb-1.5 pt-1.5 pl-10">Linkie</a>
-    </div>
+     </div>
 </div>

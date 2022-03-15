@@ -34,6 +34,11 @@ class Patient extends Model
         return $this->belongsToMany(User::class, 'patient_users');
     }
 
+    public function activitiesPatients()
+    {
+        return $this->hasMany(ActivitiesPatients::class, 'patient_id', 'id');
+    }
+
     public function attachSupervisor($supervisorId)
     {
         PatientUser::query()->create([

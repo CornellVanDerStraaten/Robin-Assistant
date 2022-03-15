@@ -132,6 +132,6 @@ class CrudStepComponent extends Component
     public function addAudioUrl($url)
     {
         $this->step->audio_url = $url;
-        $this->saveCurrentStep();
+        $this->step->save();
     }
 }
