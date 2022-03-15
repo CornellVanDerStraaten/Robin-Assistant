@@ -15,7 +15,7 @@ class CrudStepComponent extends Component
     public Step|null $step = null;
     public $title, $duration, $image;
 
-    protected $listeners = ['openStep', 'refresh' => '$refresh'];
+    protected $listeners = ['openStep', 'refresh' => '$refresh', 'addAudioUrl'];
 
     public function mount()
     {
@@ -127,5 +127,11 @@ class CrudStepComponent extends Component
         if (!empty($validationArray)) {
             $this->validate($validationArray);
         }
+    }
+
+    public function addAudioUrl($url)
+    {
+        $this->step->audio_url = $url;
+        $this->saveCurrentStep();
     }
 }

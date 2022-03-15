@@ -1,5 +1,5 @@
 <div class="h-5/6">
-    <div class="h-5/6 flex flex-row p-5 relative">
+    <div class="h-5/6 flex flex-row p-5">
         <livewire:sortable-steps-component :activity="$activity" />
         <livewire:crud-step-component :activity="$activity"/>
     </div>
